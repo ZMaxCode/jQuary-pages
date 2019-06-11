@@ -1,0 +1,9 @@
+.pagesBlock{
+    width: 100%;
+}
+
+#block1, #block2, #block3, #block4{
+    width: 100%;
+    height: 50vh;
+    font-size: 2vw;
+}
