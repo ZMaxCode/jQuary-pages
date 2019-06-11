@@ -1,7 +1,6 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Pages module</title>
         <meta name="description" content="">
         <script src="jquery.js" type="text/javascript"></script>
@@ -9,26 +8,38 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <div class = "pagesHead"
-            pagesNames = "test1 test2 test3 test4"
-            blockName = "pagesBlock1"
-        ></div>
-        <div class = "pagesBlock1">
-            <div id = "block1">block1</div>
-            <div id = "block2">block2</div>
-            <div id = "block3">block3</div>
-            <div id = "block4">block4</div>
+
+        <h2>Horizontal page turning animation, horizontal tab layout</h2>
+        
+        <div class = "bigPageBlock">
+            <div class = "pagesHead"
+                pagesNames = "test1 test2 test3 test4"
+                blockName = "pagesBlock1"
+                changeBlockStyle = "list 0.5s"
+            ></div>
+            <div class = "pagesBlock1">
+                <div id = "block1">block1</div>
+                <div id = "block2">block2</div>
+                <div id = "block3">block3</div>
+                <div id = "block4">block4</div>
+            </div>
         </div>
 
-        <div class = "pagesHead"
-            pagesNames = "test1 test2 test3 test4"
-            blockName = "pagesBlock2"
-        ></div>
-        <div class = "pagesBlock2">
-            <div id = "block1">block1</div>
-            <div id = "block2">block2</div>
-            <div id = "block3">block3</div>
-            <div id = "block4">block4</div>
+        <h2>No animation turning over, horizontal tab layout</h2>
+
+        <div class = "bigPageBlock">
+            <div class = "pagesHead"
+                pagesNames = "test1 test2 test3 test4"
+                blockName = "pagesBlock2"
+                changeBlockStyle = "none"
+            ></div>
+            <div class = "pagesBlock2">
+                <div id = "block1">block1</div>
+                <div id = "block2">block2</div>
+                <div id = "block3">block3</div>
+                <div id = "block4">block4</div>
+            </div>
         </div>
+        
     </body>
 </html>

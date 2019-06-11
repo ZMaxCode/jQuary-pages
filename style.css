@@ -7,3 +7,7 @@
     height: 50vh;
     font-size: 2vw;
 }
+
+.bigPageBlock{
+    border: solid 2px black;
+}

@@ -34,10 +34,24 @@ function createPagesHead(){
 
         let pages = pageHeadBlock.eq(i).attr("pagesNames").split(" ");
         let block = pageHeadBlock.eq(i).attr("blockName");
+        let blockStyle = pageHeadBlock.eq(i).attr("changeBlockStyle").split(" ")
         let childrenBlock = jq("." + block).children();
 
-        childrenBlock.hide();
-        childrenBlock.eq(0).show();
+        if(blockStyle[0] === "list"){
+
+            jq("." + block).css("overflow-x", "hidden");
+            childrenBlock.wrapAll("<div class = \"listBlock\"/>")
+                        .css("display", "inline-block");
+            jq(".listBlock").css({
+                "white-space" : "nowrap",
+                "transition-duration" : blockStyle[1]
+            });
+
+        }
+        else{
+            childrenBlock.hide();
+            childrenBlock.eq(0).show();
+        }
 
         for(let j = 0; j < pages.length; j++){
 
@@ -54,11 +68,18 @@ function createPagesHead(){
             page.eq(j).on("click", () => {
 
                 if(j !== prevPage[i]){
-                    childrenBlock.eq(j).show();
-                    childrenBlock.eq(prevPage[i]).hide();
+
+                    if(blockStyle[0] === "list")
+                        jq(".listBlock").css("transform", "translateX(" + j * -100 + "%)");
+                    else{
+                        childrenBlock.eq(j).show();
+                        childrenBlock.eq(prevPage[i]).hide();
+                    }
+
                     page.eq(j).css(ActivePageStyle);
                     page.eq(prevPage[i]).css(NotActivePageStyle);
                     prevPage[i] = j;
+
                 }
 
             })
