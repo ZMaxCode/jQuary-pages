@@ -38,20 +38,27 @@ function createPagesHead(){
         let verticalOrHorisontalTab = pageHeadBlock.eq(i).attr("verticalOrHorisontalTab");
         let childrenBlock = jq("." + block).children();
 
-        if(blockStyle[0] === "listX"){
+        switch( blockStyle[0] ){
+            case "listX" : 
+                jq("." + block).css("overflow-x", "hidden");
+                childrenBlock.wrapAll("<div class = \"listBlock" + i + "\"/>")
+                            .css("display", "inline-block");
+                jq(".listBlock" + i).css({
+                    "white-space" : "nowrap",
+                    "transition-duration" : blockStyle[1]
+                });
+            break;
+            
+            case "listY" :
+                jq("." + block).css("overflow-y", "hidden");
+                childrenBlock.wrapAll("<div class = \"listBlock" + i + "\"/>");
+                jq(".listBlock" + i).css("transition-duration" , blockStyle[1]);
+            break;
 
-            jq("." + block).css("overflow-x", "hidden");
-            childrenBlock.wrapAll("<div class = \"listBlock\"/>")
-                        .css("display", "inline-block");
-            jq(".listBlock").css({
-                "white-space" : "nowrap",
-                "transition-duration" : blockStyle[1]
-            });
-
-        }
-        else{
-            childrenBlock.hide();
-            childrenBlock.eq(0).show();
+            default : 
+                childrenBlock.hide();
+                childrenBlock.eq(0).show();
+            break;
         }
 
         if(verticalOrHorisontalTab === "vertical"){
@@ -79,11 +86,20 @@ function createPagesHead(){
 
                 if(j !== prevPage[i]){
 
-                    if(blockStyle[0] === "listX")
-                        jq(".listBlock").eq(i).css("transform", "translateX(" + j * -100 + "%)");
-                    else{
-                        childrenBlock.eq(j).show();
-                        childrenBlock.eq(prevPage[i]).hide();
+                    switch ( blockStyle[0] ){
+
+                        case "listX" :
+                            jq(".listBlock" + i).css("transform", "translateX(" + j * -100 + "%)");
+                        break;
+
+                        case "listY" :
+                            jq(".listBlock" + i).css("transform", "translateY(" + j * -jq("." + block).height() + "px)");
+                        break;
+
+                        default :
+                            childrenBlock.eq(j).show();
+                            childrenBlock.eq(prevPage[i]).hide();
+                        break;
                     }
 
                     page.eq(j).css(ActivePageStyle);
