@@ -11,3 +11,7 @@
 .bigPageBlock{
     border: solid 2px black;
 }
+
+.vertical{
+    display: flex;
+}

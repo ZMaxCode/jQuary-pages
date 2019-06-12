@@ -34,10 +34,11 @@ function createPagesHead(){
 
         let pages = pageHeadBlock.eq(i).attr("pagesNames").split(" ");
         let block = pageHeadBlock.eq(i).attr("blockName");
-        let blockStyle = pageHeadBlock.eq(i).attr("changeBlockStyle").split(" ")
+        let blockStyle = pageHeadBlock.eq(i).attr("changeBlockStyle").split(" ");
+        let verticalOrHorisontalTab = pageHeadBlock.eq(i).attr("verticalOrHorisontalTab");
         let childrenBlock = jq("." + block).children();
 
-        if(blockStyle[0] === "list"){
+        if(blockStyle[0] === "listX"){
 
             jq("." + block).css("overflow-x", "hidden");
             childrenBlock.wrapAll("<div class = \"listBlock\"/>")
@@ -53,6 +54,14 @@ function createPagesHead(){
             childrenBlock.eq(0).show();
         }
 
+        if(verticalOrHorisontalTab === "vertical"){
+            pageHeadBlock.eq(i).css({
+                "flex-direction" : "column",
+                "flex" : "1"
+            })
+            jq("." + block).css("flex", "5");
+        }
+
         for(let j = 0; j < pages.length; j++){
 
             let page = jq("<div/>").text(pages[j]).attr("class", "page" + i);
@@ -65,12 +74,13 @@ function createPagesHead(){
         let page = jq(".page" + i);
 
         for(let j = 0; j < page.length; j++){
+
             page.eq(j).on("click", () => {
 
                 if(j !== prevPage[i]){
 
-                    if(blockStyle[0] === "list")
-                        jq(".listBlock").css("transform", "translateX(" + j * -100 + "%)");
+                    if(blockStyle[0] === "listX")
+                        jq(".listBlock").eq(i).css("transform", "translateX(" + j * -100 + "%)");
                     else{
                         childrenBlock.eq(j).show();
                         childrenBlock.eq(prevPage[i]).hide();
